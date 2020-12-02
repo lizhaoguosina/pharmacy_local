@@ -1,0 +1,20 @@
+{% extends "CMDB/base.html" %}
+
+{% block notices %}{% endblock notices %}
+
+{% block linkofnamelogin %}{% endblock linkofnamelogin %}
+
+{% block namelogin %}{{request.session.user_name}}{% endblock namelogin %}
+
+{% block titleofmain %}欢迎{{request.session.user_name}} 
+<a href='/add/'>新增</a>{% endblock titleofmain %}
+
+{% block rightdown %}欢迎使用本系统{% endblock rightdown %}
+
+{% block rightside %}{% endblock rightside%}
+
+{% block nowpage %}{{nowpage}}{% endblock nowpage %}
+
+{% block page %}{{page}}{%endblock page%}
+
+{% block search %}{% endblock search %}

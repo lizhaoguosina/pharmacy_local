@@ -1,0 +1,70 @@
+{% extends "CMDB/loged.html" %}
+
+{% block otherpage %}{% endblock otherpage %}
+
+{% block card1title %}{% endblock card1title%}
+
+{% block elsecard %}{% endblock elsecard %}
+
+{% block card2 %}{% endblock card2%}
+
+{% block card1text %}
+    {% autoescape off %}
+<section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+      <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">资产总表</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table id="assets_table" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>序号</th>
+            <th>资产标号</th>
+            <th>资产名称</th>
+            <th>状态</th>
+            <th>实验楼</th>
+            <th>房间号</th>
+            <th>入库日期</th>
+            <th>过期时间</th>
+            <th>制造商</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for asset in assets %}
+            <tr>
+                <td>{{ forloop.counter}}</td>
+                <td>{{asset.sn}}</td>
+                <td>{{asset.called}}</td>
+                <td>{{asset.get_status_display}}</td>
+                <td>{{asset.house}}</td>
+                <td>{{asset.room}}</td>
+                <td>{{asset.indate | date:"Y/m/d"}}</td>
+                <td>{{asset.expiredate | date:"Y/m/d"}}</td>
+                <td>{{asset.manufacturer}}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endautoescape %}
+{% endblock card1text%}
+
+{% block script %}
+    {% autoescape off %}
+    <script>
+        $(function () {
+                $('#assets_table').DataTable({
+                  "paging": true,
+                  "lengthChange": true,
+                  "searching": true,
+                  "ordering": true,
+                  "info": true,
+                  "autoWidth": true
+                });
+              });
+        </script>
+    {% endautoescape %}
+{% endblock script %}

@@ -1,0 +1,92 @@
+{% extends "CMDB/loged.html" %}
+
+{% block card1title %}更新信息页面{% endblock card1title%}
+
+{% block elsecard %}{% endblock elsecard %}
+
+{% block card2 %}{% endblock card2%}
+
+{% block card1text %}
+<br>
+<form class="form-group" action="/add/" method="post">
+  {% if message %}
+      <div class="=alert-warning">{{message}}</div>
+  {% endif %}
+  {% csrf_token %}
+  <div class="form-group">
+      <label for="id_sn">编码</label>
+      <input type="text" name="sn" class="form-group" id="id_sn" placeholder="资产编码" readonly="true" value="{{sn}}">
+  </div>
+  <div class="form-group">
+      <label for="id_called">名称</label>
+      <input type="text" name="called" class="form-group" id="id_called" placeholder="资产名称" required value="{{others.called}}">
+  </div>
+  <div class="form-group">
+      <label for="id_status">状态</label>
+      <select name="thingsStatus" id="id_thingsStatus">
+          <option value="0">正常未使用</option>
+          <option value="1">故障</option>
+          <option value="2">备用</option>
+          <option value="3">未知</option>
+          <option value="4" selected>使用中</option>
+      </select>
+  </div>
+  <div class="form-group">
+      <label for="id_manufacturer">制造商</label>
+      <select>
+      {% for manufacturer in manufacturers %}
+          <option value="{{manufacturer}}">{{manufacturer}}</option>
+      {% endfor %}
+      </select>
+  </div>            
+  <div class="form-group">
+      <label for="id_indate">入库时间</label>
+      <input type="date" name="indate" class="form-group" id="id_indate" placeholder="入库时间" required>
+  </div>
+  <div class="form-group">
+      <label for="id_expiredate">过期时间</label>
+      <input type="date" name="expiredate" class="form-group" id="id_expiredate" placeholder="出库时间" required>
+  </div>
+  <div>
+      <div class="form-group">
+          <label for="id_house">实验楼</label>
+          <select>
+          {% for house in houses %}
+              <option value="{{house}}">{{house}}</option>
+          {% endfor %}
+          </select>
+  </div>
+  <div>
+      <div class="form-group">
+          <label for="id_room">实验室号</label>
+          <select>
+          {% for room in rooms %}
+              <option value="{{room}}">{{room}}</option>
+          {% endfor %}
+          </select>
+  </div>
+  <div class="form-group">
+      <label for="id_memo">备注</label>
+      <input type="text" name="memo" class="form-group" id="id_memo" placeholder="备注">
+  </div>
+  <div>
+      <button type="submit" class="btn btn-primary float-right">提交</button>
+  </div>
+</form>
+{% endblock card1text%}
+{% block script %}
+    {% autoescape off %}
+    <script>
+        $(function () {
+                $('#assets_table').DataTable({
+                  "paging": true,
+                  "lengthChange": true,
+                  "searching": true,
+                  "ordering": true,
+                  "info": true,
+                  "autoWidth": true
+                });
+              });
+        </script>
+    {% endautoescape %}
+{% endblock script %}

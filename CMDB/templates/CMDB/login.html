@@ -1,0 +1,36 @@
+{% extends "CMDB/unlogindex.html" %}
+
+{% block linkofnamelogin %}{% endblock linkofnamelogin %}
+
+{% block namelogin %}{% endblock namelogin %}
+
+{% block titleofmain %}登录测试{% endblock titleofmain %}
+
+{% block card1title %}欢迎登录{% endblock card1title%}
+
+</div>
+{% block card1text %}
+    {% autoescape off %}
+</br>
+</br>
+        <form class="form-login" action="/login/" method="POST">
+            {% if message %}
+                <div class="alert alert-warning">{{message}}</div>
+            {% endif %}
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">用户名</label>
+                <input type="text" name="username" class="form-group" id="id_username" placeholder="用户名" autofocus required>
+            </div>
+            <div class="form-group">
+                <label for="id_password">密码</label>
+                <input type="password" name="password" class="form-control" id="id_password" placeholder="Password" required>
+            </div>
+            <div>
+                <a href="/register/" class="text-success " ><ins>新用户注册</ins></a>
+                <button type="submit" class="btn btn-primary float-right">登录</button>
+            </div>
+        </form>
+    {% endautoescape %}
+{% endblock card1text%}
+{% block page %}登录页面{% endblock page %}
